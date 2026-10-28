@@ -1,0 +1,9 @@
+{
+  "scope": "alibabacloud",
+  "name": "openapi",
+  "version": "0.0.1",
+  "main": "./main.dara",
+  "releases": {
+    "go": "github.com/alibabacloud-go/darabonba-openapi/v2/client:v2.2.4"
+  }
+}

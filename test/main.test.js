@@ -392,4 +392,23 @@ describe('new Generator', function () {
       ...pkg
     });
   });
+
+  it('openapi product wires pop gateway', function () {
+    const outputDir = path.join(__dirname, 'output/popv4');
+    const mainFilePath = path.join(__dirname, 'fixtures/popv4/main.dara');
+    const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, 'fixtures/popv4/Darafile'), 'utf8'));
+    const generator = new Generator({
+      outputDir,
+      pkgDir: path.join(__dirname, 'fixtures/popv4'),
+      ...pkg
+    });
+    generator.visit(DSL.parse(fs.readFileSync(mainFilePath, 'utf8'), mainFilePath));
+    const client = fs.readFileSync(path.join(outputDir, 'client/client.go'), 'utf8');
+    assert.ok(client.includes('pop "github.com/alibabacloud-go/alibabacloud-gateway-pop/client"'));
+    assert.ok(client.includes('client.ProductId = dara.String("Ecs")'));
+    assert.ok(client.includes('popClient, _popErr := pop.NewClient()'));
+    assert.ok(client.includes('client.Spi = popClient'));
+    const gomod = fs.readFileSync(path.join(outputDir, 'go.mod'), 'utf8');
+    assert.ok(gomod.includes('github.com/alibabacloud-go/alibabacloud-gateway-pop v0.1.4'));
+  });
 });

@@ -1,0 +1,13 @@
+{
+  "scope": "alibabacloud",
+  "name": "main",
+  "version": "0.0.1",
+  "main": "./main.dara",
+  "productId": "Ecs",
+  "libraries": {
+    "OpenApi": "alibabacloud:OpenApi:*"
+  },
+  "releases": {
+    "go": "github.com/alibabacloud-go/ecs-20140526/client:v1.0.0"
+  }
+}

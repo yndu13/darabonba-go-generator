@@ -1,0 +1,11 @@
+import OpenApi;
+
+extends OpenApi;
+
+init(config: OpenApi.Config) {
+  super(config);
+}
+
+function ping(): void {
+  return;
+}
